@@ -1,0 +1,15 @@
+{
+  "name": "Claude Code Devcontainer",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "mounts": [
+    "source=devc-${localWorkspaceFolderBasename}-cmdhistory-${devcontainerId},target=/cmdhistory,type=volume",
+    "source=devc-${localWorkspaceFolderBasename}-claude-${devcontainerId},target=/claude,type=volume",
+    "source=devc-${localWorkspaceFolderBasename}-gh-${devcontainerId},target=/home/vscode/.config/gh,type=volume"
+  ],
+  "postCreateCommand": "bash .devcontainer/setup.sh"
+}
