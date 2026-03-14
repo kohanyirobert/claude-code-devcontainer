@@ -4,7 +4,8 @@
     "dockerfile": "Dockerfile"
   },
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker": {}
   },
   "mounts": [
     "source=devc-${localWorkspaceFolderBasename}-cmdhistory-${devcontainerId},target=/cmdhistory,type=volume",
