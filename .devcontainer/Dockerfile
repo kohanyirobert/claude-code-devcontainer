@@ -26,5 +26,5 @@ USER vscode
 ENV PATH="/home/vscode/.local/bin:$PATH"
 
 # Install specific version of Claude Code
-ARG CLAUDE_CODE_VERSION=1.0.58
+ARG CLAUDE_CODE_VERSION=2.1.76
 RUN curl -fsSL https://claude.ai/install.sh | bash -s ${CLAUDE_CODE_VERSION}
