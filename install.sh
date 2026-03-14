@@ -1,5 +1,6 @@
 #!/bin/bash
 # Installs the devcontainer configuration to the specified target directory
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 target_dir="${1:?Target directory must be set as the first argument}"
 
 # Check if the target directory exists
@@ -19,13 +20,13 @@ fi
 if [ "${USE_REMOTE_ENV}" = "1" ]
 then
     echo "Adding remoteEnv to devcontainer.json with values from local environment variables"
-    jq -s '.[0] * .[1]' devcontainer.json remote-env.json > "$target_dir/.devcontainer/devcontainer.json"
+    jq -s '.[0] * .[1]' "$script_dir/devcontainer.json" "$script_dir/remote-env.json" > "$target_dir/.devcontainer/devcontainer.json"
 else
     echo "Skipping adding remoteEnv to devcontainer.json, USE_REMOTE_ENV is not set to 1"
-    cp devcontainer.json "$target_dir/.devcontainer/devcontainer.json"
+    cp "$script_dir/devcontainer.json" "$target_dir/.devcontainer/devcontainer.json"
 fi
 
-cp Dockerfile setup.sh "$target_dir/.devcontainer"
+cp "$script_dir/Dockerfile" "$script_dir/setup.sh" "$target_dir/.devcontainer"
 
 if [ "${USE_DOTENV}" = "1" ]
 then
@@ -34,7 +35,7 @@ then
         echo "Skipping copying .env.sample, $target_dir/.env already exists"
     else
         echo "Copying .env.sample to $target_dir/.env"
-        cp .env.sample "$target_dir/.env"
+        cp "$script_dir/.env.sample" "$target_dir/.env"
     fi
 else
     echo "Skipping copying .env.sample, USE_DOTENV is not set to 1"
