@@ -16,19 +16,20 @@ then
     mkdir "$target_dir/.devcontainer"
 fi
 
-target_basename="$(basename "$target_dir")"
+target_basename="$(basename "$(cd "$target_dir" && pwd)")"
+devcontainer_name="${DEVCONTAINER_NAME:-$target_basename}"
 
 # Check if we should include the remoteEnv configuration in devcontainer.json
 if [ "${USE_REMOTE_ENV}" = "1" ]
 then
     echo "Adding remoteEnv to devcontainer.json with values from local environment variables"
-    jq -s --arg name "$target_basename" '(.[0] * .[1]) | .name = $name' "$script_dir/devcontainer.json" "$script_dir/remote-env.json" > "$target_dir/.devcontainer/devcontainer.json"
+    jq -s --arg name "$devcontainer_name" '(.[0] * .[1]) | .name = $name' "$script_dir/devcontainer.json" "$script_dir/remote-env.json" > "$target_dir/.devcontainer/devcontainer.json"
 else
     echo "Skipping adding remoteEnv to devcontainer.json, USE_REMOTE_ENV is not set to 1"
-    jq --arg name "$target_basename" '.name = $name' "$script_dir/devcontainer.json" > "$target_dir/.devcontainer/devcontainer.json"
+    jq --arg name "$devcontainer_name" '.name = $name' "$script_dir/devcontainer.json" > "$target_dir/.devcontainer/devcontainer.json"
 fi
 
-echo "Set devcontainer name to \"$target_basename\""
+echo "Set devcontainer name to \"$devcontainer_name\""
 
 cp "$script_dir/Dockerfile" "$script_dir/setup.sh" "$target_dir/.devcontainer"
 

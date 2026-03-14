@@ -1,5 +1,5 @@
 {
-  "name": "Claude Code Devcontainer",
+  "name": "claude-code-devcontainer",
   "build": {
     "dockerfile": "Dockerfile"
   },

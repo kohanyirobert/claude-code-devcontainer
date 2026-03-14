@@ -33,6 +33,11 @@ Install with .env file support:
 USE_DOTENV=1 ./install.sh <target-dir>
 ```
 
+Install with a custom devcontainer name (defaults to target directory basename):
+```bash
+DEVCONTAINER_NAME=my-project ./install.sh <target-dir>
+```
+
 Combine both options:
 ```bash
 USE_REMOTE_ENV=1 USE_DOTENV=1 ./install.sh <target-dir>
