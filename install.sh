@@ -29,7 +29,7 @@ cp Dockerfile setup.sh "$target_dir/.devcontainer"
 
 if [ "${USE_DOTENV}" = "1" ]
 then
-    if  [ ! -f "$target_dir/.env" ]
+    if  [ -f "$target_dir/.env" ]
     then
         echo "Skipping copying .env.sample, $target_dir/.env already exists"
     else
