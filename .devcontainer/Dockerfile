@@ -32,3 +32,12 @@ ENV PATH="/home/vscode/.local/bin:$PATH"
 # Install specific version of Claude Code
 ARG CLAUDE_CODE_VERSION=2.1.76
 RUN curl -fsSL https://claude.ai/install.sh | bash -s ${CLAUDE_CODE_VERSION}
+
+# Install Superpowers plugin
+RUN claude plugin marketplace add anthropics/claude-plugins-official && \
+  claude plugin install superpowers@claude-plugins-official
+
+# Install Plannotator plugin
+RUN curl -fsSL https://plannotator.ai/install.sh | bash && \
+  claude plugin marketplace add backnotprop/plannotator && \
+  claude plugin install plannotator@plannotator
