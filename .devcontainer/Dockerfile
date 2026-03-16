@@ -3,6 +3,10 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu24.04@sha256:4bcb1b466771b1ba1ea
 
 # Install extra packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  # For Claude Code's sandboxing
+  bubblewrap \
+  socat \
+  # Common and useful tools for development and debugging
   jq \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
