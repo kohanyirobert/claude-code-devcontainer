@@ -23,6 +23,9 @@ RUN mkdir -p \
       ln -sv /claude/.claude /home/vscode/.claude && \
   chown -R vscode:vscode /cmdhistory /claude /home/vscode/.config/gh
 
+# Install agent-cost-dashboard
+RUN git clone --depth 1 https://github.com/mrexodia/agent-cost-dashboard /opt/agent-cost-dashboard
+
 # Switch to the vscode user to ensure that subsequent commands are run with the correct permissions
 USER vscode
 
