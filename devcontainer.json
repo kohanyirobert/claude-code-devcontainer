@@ -15,6 +15,9 @@
     "source=devc-${localWorkspaceFolderBasename}-claude-${devcontainerId},target=/claude,type=volume",
     "source=devc-${localWorkspaceFolderBasename}-gh-${devcontainerId},target=/home/vscode/.config/gh,type=volume"
   ],
+  "runArgs": [
+    "--add-host=host.docker.internal:host-gateway"
+  ],
   "containerEnv": {
     "PYTHONUNBUFFERED": "1"
   },

@@ -8,6 +8,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   socat \
   # Common and useful tools for development and debugging
   jq \
+  # Basic networking \
+  iputils-ping \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Set up directories and permissions to ensure command history, etc. is persistent across devcontainer rebuilds
