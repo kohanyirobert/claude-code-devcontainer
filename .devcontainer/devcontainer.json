@@ -13,6 +13,14 @@
     "source=devc-${localWorkspaceFolderBasename}-gh-${devcontainerId},target=/home/vscode/.config/gh,type=volume"
   ],
   "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "nohup python3 /opt/agent-cost-dashboard/cost_dashboard.py --host 0.0.0.0 > /tmp/cost-dashboard.log 2>&1 &",
+  "forwardPorts": [8753],
+  "portsAttributes": {
+    "8753": {
+      "label": "Agent Cost Dashboard",
+      "onAutoForward": "notify"
+    }
+  },
   "remoteEnv": {
     "ANTHROPIC_BASE_URL": "${localEnv:ANTHROPIC_BASE_URL}",
     "ANTHROPIC_AUTH_TOKEN": "${localEnv:ANTHROPIC_AUTH_TOKEN}"
