@@ -46,3 +46,21 @@ else
     echo "Skipping copying .env.sample, USE_DOTENV is not set to 1"
 fi
 
+if [ "${USE_NTFY}" = "1" ]
+then
+    echo "Installing ntfy.sh notification hook"
+    mkdir -p "$target_dir/.claude/hooks"
+    cp "$script_dir/hooks/ntfy-notify.sh" "$target_dir/.claude/hooks/ntfy-notify.sh"
+    chmod +x "$target_dir/.claude/hooks/ntfy-notify.sh"
+    settings_file="$target_dir/.claude/settings.json"
+    if [ -f "$settings_file" ]
+    then
+        jq -s '.[0] * .[1]' "$settings_file" "$script_dir/hooks/claude-settings-ntfy.json" > /tmp/claude-settings-merged.json
+        mv /tmp/claude-settings-merged.json "$settings_file"
+    else
+        cp "$script_dir/hooks/claude-settings-ntfy.json" "$settings_file"
+    fi
+else
+    echo "Skipping ntfy.sh notification hook, USE_NTFY is not set to 1"
+fi
+
