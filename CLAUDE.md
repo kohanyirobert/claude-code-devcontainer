@@ -4,12 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a devcontainer setup repository for Claude Code. It provides a standardized development environment that can be installed into any target directory to enable Claude Code development within VS Code devcontainers.
+Provides an opiniated configuration that can be installed into any target directory to enable Claude Code development within VS Code devcontainers.
 
 ## Architecture
 
-The repository contains a minimal but complete devcontainer configuration:
-
+- **.devcontainer**:
+    - This is the actual devcontainer configuration folder used while developing the project
+    - When working from within the devcontainer these are **read-only**, **never touch them, work on the files outside of the .devcontainer/ folder**
 - **Dockerfile**: Ubuntu 24.04 base with Claude Code pre-installed, persistent volume mounts for command history, Claude config, and GitHub CLI
 - **devcontainer.json**: Container configuration with GitHub CLI feature and volume mounts for persistence
 - **install.sh**: Installation script that copies devcontainer files to target directories with optional environment variable support
