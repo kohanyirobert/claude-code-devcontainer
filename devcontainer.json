@@ -5,12 +5,25 @@
   },
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/docker-outside-of-docker": {}
+    "ghcr.io/devcontainers/features/docker-outside-of-docker": {},
+    "ghcr.io/devcontainers/features/python": {
+      "version": "3.12"
+    }
   },
   "mounts": [
     "source=devc-${localWorkspaceFolderBasename}-cmdhistory-${devcontainerId},target=/cmdhistory,type=volume",
     "source=devc-${localWorkspaceFolderBasename}-claude-${devcontainerId},target=/claude,type=volume",
     "source=devc-${localWorkspaceFolderBasename}-gh-${devcontainerId},target=/home/vscode/.config/gh,type=volume"
   ],
-  "postCreateCommand": "bash .devcontainer/setup.sh"
+  "postCreateCommand": "bash .devcontainer/setup.sh",
+  "postStartCommand": "nohup bash -c 'python3 /opt/agent-cost-dashboard/cost_dashboard.py --host 0.0.0.0 > /tmp/cost-dashboard.log 2>&1 &'",
+  "forwardPorts": [
+    8753
+  ],
+  "portsAttributes": {
+    "8753": {
+      "label": "Agent Cost Dashboard",
+      "onAutoForward": "notify"
+    }
+  }
 }
