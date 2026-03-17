@@ -71,3 +71,7 @@ After installation:
 2. Connect to WSL if on Windows
 3. VS Code will prompt to reopen in devcontainer
 4. Claude Code will be available in the terminal
+
+## Notes
+
+- PYTHONUNBUFFERED needs to be set in the devcontainer.json containerEnv section to avoid an empty stdout after starting a webserver which can be misleading

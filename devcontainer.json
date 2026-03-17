@@ -15,8 +15,11 @@
     "source=devc-${localWorkspaceFolderBasename}-claude-${devcontainerId},target=/claude,type=volume",
     "source=devc-${localWorkspaceFolderBasename}-gh-${devcontainerId},target=/home/vscode/.config/gh,type=volume"
   ],
+  "containerEnv": {
+    "PYTHONUNBUFFERED": "1"
+  },
   "postCreateCommand": "bash .devcontainer/setup.sh",
-  "postStartCommand": "nohup bash -c 'python3 /opt/agent-cost-dashboard/cost_dashboard.py --host 0.0.0.0 > /tmp/cost-dashboard.log 2>&1 &'",
+  "postStartCommand": "nohup bash -c 'python3 /opt/agent-cost-dashboard/cost_dashboard.py --host 0.0.0.0 > /tmp/cost-dashboard.log 2>&1 &' > /tmp/nohup.out 2>&1",
   "forwardPorts": [
     8753
   ],
